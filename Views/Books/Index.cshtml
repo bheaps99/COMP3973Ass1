@@ -1,0 +1,26 @@
+﻿@model List<Tuple<string,string>>
+
+@{
+    ViewData["Title"] = "Harry Potter Books";
+}
+
+    <div>
+        <h1 class="display-4">@ViewData["Title"]</h1>
+
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>@ViewData["Heading"]</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Item2</td>
+                    <td style="text-align: center;">
+                        <a asp-action="Details" asp-route-id="@item.Item1" class="btn btn-sm btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>

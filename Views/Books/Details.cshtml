@@ -1,0 +1,74 @@
+@model BookDetails
+
+@{
+    ViewData["Title"] = Model.volumeInfo.title;
+
+    string ISBN = "";
+    foreach(var i in Model.volumeInfo.industryIdentifiers)
+    {
+        if(i.type == "ISBN_10") ISBN = i.identifier;
+    }
+
+    string authors =string.Join(",", Model.volumeInfo.authors);
+    string imagepath=Model.volumeInfo.imageLinks.smallThumbnail;
+    
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.volumeInfo.title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.volumeInfo.title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.volumeInfo.imageLinks.smallThumbnail)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@imagepath" />
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.volumeInfo.authors)
+        </dt>
+        <dd class="col-sm-10">
+            @authors
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.volumeInfo.publisher)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.volumeInfo.publisher)
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.volumeInfo.publishedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.volumeInfo.publishedDate)
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.volumeInfo.description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.volumeInfo.description)
+        </dd>
+
+        <dt class="col-sm-2">
+            ISBN_10
+        </dt>
+        <dd class="col-sm-10">
+            @ISBN
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary">&lt;&lt; Back to List</a>
+</div>
